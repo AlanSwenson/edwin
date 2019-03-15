@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Edwin - Data Cube</title>
+    <!-- Bootstrap 4 Stuff https://v4-alpha.getbootstrap.com/  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <!-- End Bootstrap 4 stuff -->
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.4.2.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.5/socket.io.min.js"></script>
+    <script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function () {
+            namespace = '/demo_streaming'; // change to an empty string to use the global namespace
+            // the socket.io documentation recommends sending an explicit package upon connection
+            // this is specially important when using the global namespace
+            var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
+            //var opening_div = '<div class="d-flex w-100 justify-content-between">';
+            //var tweet_format = '<h5 class="ml-10 w-75 mb-1">';
+
+            // event handler for server sent data
+            // the data is displayed in the "Received" section of the page
+            //socket.on('stream_channel', function (msg) {
+            //    $('#log').prepend(opening_div + $('<div/>').text(msg.time).html() + tweet_format +
+            //        msg.data + '</h5 >' + '<small>' + msg.created_at + '</small>');
+
+
+
+            //});
+
+            socket.on('stream_channel', function (msg) {
+                var myElem = document.getElementById(msg.id_str);
+                if (myElem === null) {
+                    $('#tweets').prepend('<div id="' + msg.id_str + '">');
+                    twttr.widgets.createTweet(
+                        msg.id_str,
+                        document.getElementById(msg.id_str),
+                        {
+                            theme: 'light'
+                        }
+                    );
+                };
+
+
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Edwin - Data Cube</h1>
+    <div id="tweets"></div>
+    <div id="log"></div>
+</body>
+
+</html>
