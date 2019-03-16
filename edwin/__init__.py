@@ -68,9 +68,10 @@ def create_app():
 
                     # if the tweet meets our criteria, display it in the browser
                     if tweet_is_valid(text):
+                        # print(data)
                         socketio.emit(
                             "stream_channel",
-                            {"id_str": text["id_str"]},
+                            {"id_str": text["orig_id_str"]},
                             namespace="/demo_streaming",
                         )
                         print("displayed")
@@ -98,7 +99,9 @@ def create_app():
 
 
 def process_tweet(tweet):
-    actually_created_at = tweet.get("retweeted_status", {}).get("created_at")
+    retweet = tweet.get("retweeted_status", {})
+    actually_created_at = retweet.get("created_at")
+    orig_id_str = retweet.get("id_str")
     return {
         "tweet": tweet["text"],
         "created_at": tweet["created_at"],
@@ -106,6 +109,7 @@ def process_tweet(tweet):
         "is_quote_status": tweet["is_quote_status"],
         "in_reply_to_user_id": tweet["in_reply_to_user_id"],
         "actually_created_at": actually_created_at,
+        "orig_id_str": orig_id_str,
         # "username": tweet["username"],
         # "headshot_url": t.user.profile_image_url,
     }
@@ -133,10 +137,11 @@ def tweet_is_valid(text):
     duration = duration.total_seconds()
     # print("duration: " + str(duration))
     if (
-        duration < 60
+        duration < 600
         and actually_created_at
         and not text["in_reply_to_user_id"]
         and not text["is_quote_status"]
     ):
-        print(text)
+        # print(text)
+        print(str(text["orig_id_str"]))
         return True
