@@ -10,11 +10,14 @@ tweepy = "*"
 flask-restless = "*"
 flask-socketio = "*"
 eventlet = "*"
-threading = "*"
 pytz = "*"
+zappa = "*"
 
 [dev-packages]
 black = "*"
 
 [requires]
 python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
