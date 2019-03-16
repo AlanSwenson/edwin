@@ -12,6 +12,7 @@ flask-socketio = "*"
 eventlet = "*"
 pytz = "*"
 zappa = "*"
+gunicorn = "*"
 
 [dev-packages]
 black = "*"

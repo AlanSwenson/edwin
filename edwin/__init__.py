@@ -45,7 +45,7 @@ def create_app():
 
         ids = api.friends_ids(screen_name="ashley_begin", stringify_ids="true")
 
-        @app.route("/")
+        @app.route("/", methods=["GET"])
         def index():
             global thread
             if thread is None:
