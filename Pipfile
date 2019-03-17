@@ -7,18 +7,15 @@ name = "pypi"
 environs = "*"
 flask = "*"
 tweepy = "*"
-flask-restless = "*"
 flask-socketio = "*"
 eventlet = "*"
 pytz = "*"
-zappa = "*"
-gunicorn = "*"
 
 [dev-packages]
 black = "*"
 
 [requires]
-python_version = "3.6"
+python_full_version = "3.6.5"
 
 [pipenv]
 allow_prereleases = true
