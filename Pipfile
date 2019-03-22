@@ -12,10 +12,9 @@ eventlet = "*"
 pytz = "*"
 
 [dev-packages]
-black = "*"
 
 [requires]
-python_full_version = "3.6.5"
+python_version = "3.5"
 
 [pipenv]
 allow_prereleases = true
