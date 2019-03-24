@@ -10,8 +10,10 @@ tweepy = "*"
 flask-socketio = "*"
 eventlet = "*"
 pytz = "*"
+darkskylib = "*"
 
 [dev-packages]
+pylint = "*"
 
 [requires]
 python_version = "3.5"

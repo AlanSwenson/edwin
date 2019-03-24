@@ -18,24 +18,13 @@
 
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function () {
-            namespace = '/demo_streaming'; // change to an empty string to use the global namespace
+            //namespace = '/tweet_streaming'; // change to an empty string to use the global namespace
             // the socket.io documentation recommends sending an explicit package upon connection
             // this is specially important when using the global namespace
-            var socket = io.connect('http://' + document.domain + ':' + location.port + namespace);
-            //var opening_div = '<div class="d-flex w-100 justify-content-between">';
-            //var tweet_format = '<h5 class="ml-10 w-75 mb-1">';
+            var tweet_socket = io.connect('http://' + document.domain + ':' + location.port + '/tweet_streaming');
+            var darksky_socket = io.connect('http://' + document.domain + ':' + location.port + '/darksky_streaming');
 
-            // event handler for server sent data
-            // the data is displayed in the "Received" section of the page
-            //socket.on('stream_channel', function (msg) {
-            //    $('#log').prepend(opening_div + $('<div/>').text(msg.time).html() + tweet_format +
-            //        msg.data + '</h5 >' + '<small>' + msg.created_at + '</small>');
-
-
-
-            //});
-
-            socket.on('stream_channel', function (msg) {
+            tweet_socket.on('tweet_channel', function (msg) {
                 var myElem = document.getElementById(msg.id_str);
                 if (myElem === null) {
                     $('#tweets').prepend('<div id="' + msg.id_str + '">');
@@ -49,14 +38,23 @@
                         });
 
                 };
+            });
 
+            darksky_socket.on('darksky_channel', function (msg) {
+                var myElem = document.getElementById("darksky");
+                $('#darksky').prepend('Temp in DC: ' + msg.temp);
 
             });
+
+
+
+
         });
     </script>
 </head>
 
 <body>
+    <div id="darksky"></div>
     <div id="tweets"></div>
     <div id="log"></div>
 </body>
