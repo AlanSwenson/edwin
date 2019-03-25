@@ -3,7 +3,6 @@
 
 <head>
     <title>Edwin - Data Cube</title>
-    <meta http-equiv="refresh" content="1800">
     <!-- Bootstrap 4 Stuff https://v4-alpha.getbootstrap.com/  -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
         integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
@@ -32,6 +31,9 @@
                 var myElem = document.getElementById(msg.id_str);
                 if (myElem === null) {
                     $('#tweets').prepend('<div id="' + msg.id_str + '">');
+                    setTimeout(function () {
+                        $('#' + msg.id_str).remove();
+                    }, 300000);
                     twttr.widgets.createTweet(
                         msg.id_str,
                         document.getElementById(msg.id_str),

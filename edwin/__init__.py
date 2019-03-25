@@ -54,11 +54,12 @@ def create_app():
         api = API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
         ids = api.friends_ids(screen_name=TWITTER_SCREEN_NAME, stringify_ids="true")
-        dc = forecast(DARKSKY_KEY, 38.9159, -77.0446)
-        #dc_json = json.loads(dc)
-        print(str(dc))
+
+        try:
+            dc = forecast(DARKSKY_KEY, 38.9159, -77.0446)
         
-        
+        except:
+            pass   
 
         @app.route("/", methods=["GET"])
         def index():
@@ -79,7 +80,11 @@ def create_app():
 
         def darksky_thread():
             while True:
-                dc.refresh(extend='daily')
+                try:
+                    dc.refresh(extend='daily')
+                except:
+                    print("break")
+                    break
                 sunrise = convert_unix_ts(dc['daily']['data'][0]['sunriseTime'])
                 sunset = convert_unix_ts(dc['daily']['data'][0]['sunsetTime'])
                 socketio.emit(
@@ -89,7 +94,7 @@ def create_app():
                             "sunset": sunset},
                             namespace="/darksky_streaming",
                         )
-                time.sleep(30)
+                time.sleep(120)
 
             
 
