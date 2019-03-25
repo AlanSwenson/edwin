@@ -55,6 +55,8 @@ def create_app():
 
         ids = api.friends_ids(screen_name=TWITTER_SCREEN_NAME, stringify_ids="true")
         dc = forecast(DARKSKY_KEY, 38.9159, -77.0446)
+        #dc_json = json.loads(dc)
+        print(str(dc))
         
         
 
@@ -77,17 +79,24 @@ def create_app():
 
         def darksky_thread():
             while True:
-                dc.refresh()
-                print("Temp in DC: " + str(dc.temperature))
+                dc.refresh(extend='daily')
+                sunrise = convert_unix_ts(dc['daily']['data'][0]['sunriseTime'])
+                sunset = convert_unix_ts(dc['daily']['data'][0]['sunsetTime'])
                 socketio.emit(
                             "darksky_channel",
-                            {"temp": dc.temperature},
+                            {"temp": int(dc.temperature),
+                            "sunrise": sunrise,
+                            "sunset": sunset},
                             namespace="/darksky_streaming",
                         )
-                time.sleep(300)
+                time.sleep(30)
 
             
 
         listener = StdOutListener()
 
         return app
+
+def convert_unix_ts(ts):
+    ts= int(ts)
+    return datetime.fromtimestamp(ts).strftime('%-I:%M:%S')

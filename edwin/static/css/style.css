@@ -9,16 +9,34 @@
 }
 
 #tweets {
-    width: 50%;
+    width: 500px;
     margin: 0 auto;
     background-color: #212121 !important;
     color: white !important;
 }
 
 #darksky{
-    width: 50%;
-    margin: 0 auto;
+    width: 100%;
+    font-size: 300%;
+    font-family: AvenirNext-UltraLight;
+    letter-spacing: -3px;
+    background-color: #0e0d0d !important;
+    overflow: auto;
+    
+}
+#temp{
+    background-color: #0e0d0d;
+    float: left;
+    padding: 0px 15px;
+}
 
+#sun{
+    float: right;
+    margin: 0 auto;
+    font-family: AvenirNext-UltraLight;
+    letter-spacing: -3px;
+    background-color: #0e0d0d;
+    padding: 0px 15px;
 }
 
 body {

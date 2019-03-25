@@ -7,35 +7,36 @@ from tweepy.streaming import StreamListener
 from edwin import socketio
 
 class StdOutListener(StreamListener):
-            def __init__(self):
+    def __init__(self):
+        pass
+
+    def on_data(self, data):
+        # print(data)
+        try:
+            # load json into a dict
+            tweet = json.loads(data)
+            # pull relevent info from the dict
+            text = process_tweet(tweet)
+
+            # if the tweet meets our criteria, display it in the browser
+            if tweet_is_valid(text):
+                socketio.emit(
+                    "tweet_channel",
+                    {"id_str": text["orig_id_str"]},
+                    namespace="/tweet_streaming",
+                )
+                print("displayed")
+            else:
+                #print("skipped")
                 pass
 
-            def on_data(self, data):
-                # print(data)
-                try:
-                    # load json into a dict
-                    tweet = json.loads(data)
-                    # pull relevent info from the dict
-                    text = process_tweet(tweet)
+        except Exception as e:
+            print("passed " + str(e))
+            pass
 
-                    # if the tweet meets our criteria, display it in the browser
-                    if tweet_is_valid(text):
-                        socketio.emit(
-                            "tweet_channel",
-                            {"id_str": text["orig_id_str"]},
-                            namespace="/tweet_streaming",
-                        )
-                        print("displayed")
-                    else:
-                        print("skipped")
-
-                except Exception as e:
-                    print("passed " + str(e))
-                    pass
-
-            def on_error(self, status):
-                print("Error status code", status)
-                exit()
+    def on_error(self, status):
+        print("Error status code", status)
+        exit()
 
 def process_tweet(tweet):
     retweet = tweet.get("retweeted_status", {})
