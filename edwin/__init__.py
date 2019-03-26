@@ -65,9 +65,8 @@ def create_app():
         def index():
             global thread
             if thread is None:
-                thread = Thread(target=twitter_thread)
-                thread2 = Thread(target=darksky_thread)
-                thread.daemon = True
+                thread = Thread(target=twitter_thread, daemon=True)
+                thread2 = Thread(target=darksky_thread, daemon=True)
                 thread.start()
                 thread2.start()
             return render_template("index.html")
@@ -82,18 +81,23 @@ def create_app():
             while True:
                 try:
                     dc.refresh(extend='daily')
+                    sunrise = convert_unix_ts(dc['daily']['data'][0]['sunriseTime'])
+                    sunset = convert_unix_ts(dc['daily']['data'][0]['sunsetTime'])
+                    temp = int(dc.temperature)
                 except:
                     print("break")
-                    break
-                sunrise = convert_unix_ts(dc['daily']['data'][0]['sunriseTime'])
-                sunset = convert_unix_ts(dc['daily']['data'][0]['sunsetTime'])
+                    sunrise = "_"
+                    sunset = "-"
+                    temp = "Connection Lost"
+
                 socketio.emit(
                             "darksky_channel",
-                            {"temp": int(dc.temperature),
+                            {"temp": temp,
                             "sunrise": sunrise,
                             "sunset": sunset},
                             namespace="/darksky_streaming",
                         )
+                
                 time.sleep(120)
 
             

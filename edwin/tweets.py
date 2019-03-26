@@ -77,7 +77,7 @@ def tweet_is_valid(text):
     duration = duration.total_seconds()
     # print("duration: " + str(duration))
     if (
-        duration < 120
+        duration < 300
         and actually_created_at
         and not text["in_reply_to_user_id"]
         and not text["is_quote_status"]

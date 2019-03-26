@@ -1,3 +1,9 @@
+@font-face{
+    font-family: AvenirNextLTPro-UltLt;
+    src: url('../vendor/avenir-next-lt-pro-cufonfonts-webfont/AvenirNextLTPro-UltLt.woff');
+}
+
+
 #tweet{
     width: 400px !important;
 
@@ -18,7 +24,7 @@
 #darksky{
     width: 100%;
     font-size: 300%;
-    font-family: AvenirNext-UltraLight;
+    font-family: AvenirNextLTPro-UltLt;
     letter-spacing: -3px;
     background-color: #0e0d0d !important;
     overflow: auto;
@@ -33,7 +39,7 @@
 #sun{
     float: right;
     margin: 0 auto;
-    font-family: AvenirNext-UltraLight;
+    font-family: AvenirNextLTPro-UltLt;
     letter-spacing: -3px;
     background-color: #0e0d0d;
     padding: 0px 15px;

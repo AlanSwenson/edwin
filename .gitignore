@@ -108,3 +108,5 @@ venv.bak/
 
 #zappa
 zappa_settings.json
+
+.DS_Store
