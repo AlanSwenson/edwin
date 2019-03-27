@@ -28,12 +28,20 @@
     letter-spacing: -3px;
     background-color: #0e0d0d !important;
     overflow: auto;
+    background-image:
+    linear-gradient(
+        black, #212121
+    );
     
 }
 #temp{
     background-color: #0e0d0d;
     float: left;
-    padding: 0px 15px;
+    padding: 10px 15px;
+    background-image:
+    linear-gradient(
+        black, #212121
+    );
 }
 
 #sun{
@@ -42,7 +50,11 @@
     font-family: AvenirNextLTPro-UltLt;
     letter-spacing: -3px;
     background-color: #0e0d0d;
-    padding: 0px 15px;
+    padding: 10px 15px;
+    background-image:
+    linear-gradient(
+        black, #212121
+    );
 }
 
 html{

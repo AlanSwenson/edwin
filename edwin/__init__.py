@@ -23,9 +23,6 @@ from flask_socketio import (
 
 from darksky import forecast
 
-
-
-
 socketio = SocketIO()
 thread = None
 
@@ -59,6 +56,7 @@ def create_app():
             dc = forecast(DARKSKY_KEY, 38.9159, -77.0446)
         
         except:
+            print("failed connection to darksky")
             pass   
 
         @app.route("/", methods=["GET"])
@@ -72,7 +70,7 @@ def create_app():
             return render_template("index.html")
    
         def twitter_thread():
-            """Example of how to send server generated events to clients."""
+            """connect to twitter sreaming API and send data to client"""
             stream = Stream(auth, listener)
             _follow = ["15736341", "1"]
             stream.filter(follow=ids, filter_level="low")
@@ -83,6 +81,7 @@ def create_app():
                     dc.refresh(extend='daily')
                     sunrise = convert_unix_ts(dc['daily']['data'][0]['sunriseTime'])
                     sunset = convert_unix_ts(dc['daily']['data'][0]['sunsetTime'])
+                    # convert to int for a nice round whole number temperture
                     temp = int(dc.temperature)
                 except:
                     print("break")
