@@ -47,8 +47,8 @@
 
             darksky_socket.on('darksky_channel', function (msg) {
                 //var myElem = document.getElementById("darksky");
-                $('#temp').html(msg.temp + '°');
-                $('#sun').html('<i class="wi wi-sunrise"></i>   ' + msg.sunrise + '  <i class="wi wi-sunset"></i>   ' + msg.sunset);
+                $('.temp').html(msg.temp + '°');
+                $('.sun').html('<i class="wi wi-sunrise"></i>   ' + msg.sunrise + '<br><i class="wi wi-sunset"></i>   ' + msg.sunset);
 
             });
 
@@ -60,9 +60,13 @@
 </head>
 
 <body>
-    <div id="darksky">
-        <div id="temp"></div>
-        <div id="sun"></div>
+    <div class="darksky">
+        <div class="temp"></div>
+        <div class="slide">
+            <div class="slide_child">
+                <div class="sun"></div>
+            </div>
+        </div>
     </div>
     <div id="tweets"></div>
     <div id="log"></div>

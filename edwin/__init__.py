@@ -107,4 +107,4 @@ def create_app():
 
 def convert_unix_ts(ts):
     ts= int(ts)
-    return datetime.fromtimestamp(ts).strftime('%-I:%M:%S')
+    return datetime.fromtimestamp(ts).strftime('%-I:%M')

@@ -3,60 +3,6 @@
     src: url('../vendor/avenir-next-lt-pro-cufonfonts-webfont/AvenirNextLTPro-UltLt.woff');
 }
 
-
-#tweet{
-    width: 400px !important;
-
-}
-
-#tweet iframe{
-    border: none !important;
-    box-shadow: none !important;
-}
-
-#tweets {
-    width: 500px;
-    margin: 0 auto;
-    background-color: #212121 !important;
-    color: white !important;
-}
-
-#darksky{
-    width: 100%;
-    font-size: 450%;
-    font-family: AvenirNextLTPro-UltLt;
-    letter-spacing: -3px;
-    background-color: #0e0d0d !important;
-    overflow: auto;
-    background-image:
-    linear-gradient(
-        black, #212121
-    );
-    
-}
-#temp{
-    background-color: #0e0d0d;
-    float: left;
-    padding: 10px 15px;
-    background-image:
-    linear-gradient(
-        black, #212121
-    );
-}
-
-#sun{
-    float: right;
-    margin: 0 auto;
-    font-family: AvenirNextLTPro-UltLt;
-    letter-spacing: -3px;
-    background-color: #0e0d0d;
-    padding: 10px 15px;
-    background-image:
-    linear-gradient(
-        black, #212121
-    );
-}
-
 html{
     overflow:hidden;
 }
@@ -66,8 +12,64 @@ body {
     color: white;
   }
 
-.EmbeddedTweet {
+.darksky{
+    width: 100%;
+    font-size: 450%;
+    font-family: AvenirNextLTPro-UltLt;
+    letter-spacing: -3px;
+    background-color: #0e0d0d !important;
+    overflow: auto;
+    background-image:
+    linear-gradient(
+        black, #212121
+    );  
+}
+
+.darksky .slide .slide_child .sun{
+    float: right;
+    margin: 0 auto;
+    font-family: AvenirNextLTPro-UltLt;
+    letter-spacing: -3px;
+    padding: 10px 15px;
+    overflow:auto;
+}
+
+.temp{
+    float: left;
+    padding: 10px 15px;
+    overflow: auto;
+}
+
+.slide{
+   float: right;
+   overflow:hidden;
+   height: 1.35em;
+}
+
+.slide_child{
+  animation: slider infinite 30s alternate;
+  animation-timing-function: ease;
+  height: 200%;
+}
+
+@keyframes slider{
+  0%{
+    margin-top:-40%;
+  }
+  46%{
+    margin-top:-40%;
+  }
+  52%{
+    margin-top:0%
+  }
+  100%{
+    margin-top:0%
+  }
+}
+
+#tweets {
+    width: 500px;
+    margin: 0 auto;
     background-color: #212121 !important;
     color: white !important;
-  }
-
+}
