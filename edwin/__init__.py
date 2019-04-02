@@ -25,6 +25,7 @@ from darksky import forecast
 
 socketio = SocketIO()
 thread = None
+thread2 = None
 
 from edwin.tweets import StdOutListener
 
@@ -57,15 +58,16 @@ def create_app():
         
         except:
             print("failed connection to darksky")
-            pass   
 
         @app.route("/", methods=["GET"])
         def index():
             global thread
+            global thread2
             if thread is None:
                 thread = Thread(target=twitter_thread, daemon=True)
-                thread2 = Thread(target=darksky_thread, daemon=True)
                 thread.start()
+            if thread2 is None:
+                thread2 = Thread(target=darksky_thread, daemon=True)
                 thread2.start()
             return render_template("index.html")
    

@@ -32,7 +32,7 @@
                     $('#tweets').prepend('<div id="' + msg.id_str + '">');
                     setTimeout(function () {
                         $('#' + msg.id_str).remove();
-                    }, 300000);
+                    }, 500000);
                     twttr.widgets.createTweet(
                         msg.id_str,
                         document.getElementById(msg.id_str),

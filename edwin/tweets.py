@@ -3,7 +3,6 @@ from datetime import datetime, timedelta, timezone
 import pytz
 
 from tweepy.streaming import StreamListener
-#from flask_socketio import SocketIO
 from edwin import socketio
 
 class StdOutListener(StreamListener):
@@ -32,7 +31,6 @@ class StdOutListener(StreamListener):
 
         except Exception as e:
             print("passed " + str(e))
-            pass
 
     def on_error(self, status):
         print("Error status code", status)
